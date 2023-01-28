@@ -18,7 +18,7 @@ class NewsRepositoryImpl @Inject constructor(
 
         emit(Resource.Loading())
 
-        val localArticles = newsDao.getArticles()
+        val localArticles = newsDao.getArticles().reversed()
 
         try {
             val remoteArticles =
@@ -54,7 +54,7 @@ class NewsRepositoryImpl @Inject constructor(
         }
 
         val newArticles = newsDao.getArticles().map { it.toArticle() }
-        emit(Resource.Success(data = newArticles))
+        emit(Resource.Success(data = newArticles.reversed()))
 
     }
 }
